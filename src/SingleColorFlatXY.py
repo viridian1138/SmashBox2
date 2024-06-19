@@ -91,12 +91,12 @@ class SingleColorFlatXY(iRenderGen.IRenderGen):
         
         face0 = gen.allocFace()
         face0.faceColor = self.color
-        face0.normal.set( 0.0, 0.0, -1.0 )
+        face0.normal.set( 0.0, 0.0, 1.0 )
         
         
         face1 = gen.allocFace()
         face1.faceColor = self.color
-        face1.normal.set( 0.0, 0.0, -1.0 )
+        face1.normal.set( 0.0, 0.0, 1.0 )
         
         
         indices = [

@@ -90,23 +90,27 @@ class SingleColorTetrahedron(iRenderGen.IRenderGen):
         face0 = gen.allocFace()
         face0.faceColor = self.color
         face0.normal.calcNormal(self.vec0, self.vec1, self.vec2)
+        face0.normal = face0.normal.checkNormal( self.vec0 , self.posn )
         
         
         face1 = gen.allocFace()
         face1.faceColor = self.color
         face1.normal.calcNormal(self.vec0, self.vec1, self.vec3)
+        face1.normal = face1.normal.checkNormal( self.vec0 , self.posn )
         
         
         
         face2 = gen.allocFace()
         face2.faceColor = self.color
         face2.normal.calcNormal(self.vec0, self.vec2, self.vec3)
+        face2.normal = face2.normal.checkNormal( self.vec0 , self.posn )
         
         
         
         face3 = gen.allocFace()
         face3.faceColor = self.color
         face3.normal.calcNormal(self.vec1, self.vec2, self.vec3)
+        face3.normal = face3.normal.checkNormal( self.vec1 , self.posn )
         
         
         indices = [

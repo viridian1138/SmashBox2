@@ -116,71 +116,83 @@ class SingleColorBox(iRenderGen.IRenderGen):
         face0 = gen.allocFace()
         face0.faceColor = self.color
         face0.normal.set( 0.0, 0.0, -1.0 )
+        face0.normal = face0.normal.checkNormal( self.vec0 , self.posn )
         
         
         face1 = gen.allocFace()
         face1.faceColor = self.color
         face1.normal.set( 0.0, 0.0, -1.0 )
+        face1.normal = face1.normal.checkNormal( self.vec0 , self.posn )
         
         
         
         face2 = gen.allocFace()
         face2.faceColor = self.color
         face2.normal.set( 0.0, 0.0, 1.0 )
+        face2.normal = face2.normal.checkNormal( self.vec4 , self.posn )
         
         
         
         face3 = gen.allocFace()
         face3.faceColor = self.color
         face3.normal.set( 0.0, 0.0, 1.0 )
+        face3.normal = face3.normal.checkNormal( self.vec4 , self.posn )
         
         
         
         face4 = gen.allocFace()
         face4.faceColor = self.color
         face4.normal.set( 1.0, 0.0, 0.0 )
+        face4.normal = face4.normal.checkNormal( self.vec0 , self.posn )
         
         
         
         face5 = gen.allocFace()
         face5.faceColor = self.color
         face5.normal.set( 1.0, 0.0, 0.0 )
+        face5.normal = face5.normal.checkNormal( self.vec0 , self.posn )
         
         
         
         face6 = gen.allocFace()
         face6.faceColor = self.color
         face6.normal.set( -1.0, 0.0, 0.0 )
+        face6.normal = face6.normal.checkNormal( self.vec1 , self.posn )
         
         
         
         face7 = gen.allocFace()
         face7.faceColor = self.color
         face7.normal.set( -1.0, 0.0, 0.0 )
+        face7.normal = face7.normal.checkNormal( self.vec1 , self.posn )
         
         
         
         face8 = gen.allocFace()
         face8.faceColor = self.color
         face8.normal.set( 0.0, 1.0, 0.0 )
+        face8.normal = face8.normal.checkNormal( self.vec2 , self.posn )
         
         
         
         face9 = gen.allocFace()
         face9.faceColor = self.color
         face9.normal.set( 0.0, 1.0, 0.0 )
+        face9.normal = face9.normal.checkNormal( self.vec2 , self.posn )
         
         
         
         face10 = gen.allocFace()
         face10.faceColor = self.color
         face10.normal.set( 0.0, -1.0, 0.0 )
+        face10.normal = face10.normal.checkNormal( self.vec0 , self.posn )
         
         
         
         face11 = gen.allocFace()
         face11.faceColor = self.color
         face11.normal.set( 0.0, -1.0, 0.0 )
+        face11.normal = face11.normal.checkNormal( self.vec0 , self.posn )
         
         
         indices = [

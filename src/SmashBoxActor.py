@@ -1077,14 +1077,14 @@ class SmashBoxActor(object):
               float lambertTerm = dot( normal , lightVector );
               if( lambertTerm < 0.0 )
               {
-                  lambertTerm = -lambertTerm;
+                  lambertTerm = 0.0;
               }
               vec3 diffuseColor = directionalIntensity * lambertTerm * _color;
               vec3 R = reflect( -lightVector , normal );
               float specularDot = dot( R , eyeVector );
               if( specularDot < 0.0 )
               {
-                  specularDot = -specularDot;
+                  specularDot = 0.0;
               }
               float specular = directionalIntensity * pow( specularDot , shininess );
               vec3 specularColor = specular * specularColorInput;

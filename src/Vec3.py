@@ -40,6 +40,11 @@ class Vec3(object):
         self.y = self.y - inA.y
         self.z = self.z - inA.z
 
+    def negate(self ):
+        self.x = - self.x
+        self.y = - self.y
+        self.z = - self.z
+
     def set(self, x : float , y : float , z : float ):
         self.x = x
         self.y = y
@@ -50,6 +55,9 @@ class Vec3(object):
         self.y = a.z * b.x - a.x * b.z
         self.z = a.x * b.y - a.y * b.z
 
+    def dotProduct(self, a ):
+        return self.x * a.x + self.y * a.y + self.z * a.z
+
     def calcNormal(self, a, b, c ):
         deltaA = Vec3()
         deltaB = Vec3()
@@ -58,6 +66,17 @@ class Vec3(object):
         deltaA.sub( a )
         deltaB.sub( b )
         self.crossProduct( deltaA , deltaB )
+        
+    def checkNormal(self, ptA, cntr):
+        delta = Vec3()
+        delta.set( ptA.x , ptA.y , ptA.z )
+        delta.sub( cntr )
+        ret = Vec3()
+        ret.set( self.x , self.y , self.z )
+        dotVal = ret.dotProduct( delta )
+        if dotVal < 0.0 :
+            ret.negate()
+        return ret
 
     def setUniformIndex(self, index : int ):
         self.uniformIndex = index
