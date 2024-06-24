@@ -31,6 +31,26 @@ import Target
 import Vec3
 
 
+FACE_LIMIT = RetainedMode.FACE_LIMIT
+
+
+
+FACE_VECT = RetainedMode.FACE_VECT
+
+FACE_VECT_STR = RetainedMode.FACE_VECT_STR
+
+
+
+FACE_INDEX = RetainedMode.FACE_INDEX
+
+FACE_INDEX_STR = RetainedMode.FACE_INDEX_STR
+
+
+
+
+INDEX_MAX = RetainedMode.INDEX_MAX
+
+
 
 
 class SceneGenerator(object):
@@ -298,10 +318,10 @@ class SceneGenerator(object):
         
         
         
-        # self.secondSegment2 = SevenSegmentFixed.SevenSegmentFixed()
-        # secondSegment2Posn = Vec3.Vec3()
-        # secondSegment2Posn.set( self.bucketXOffset - ( 9 * 0 ) * segSize, 5 , self.backDistBucket )
-        # self.secondSegment2.init( secondSegment2Posn , "secondSegment2_segment" )
+        self.secondSegment2 = SevenSegmentFixed.SevenSegmentFixed()
+        secondSegment2Posn = Vec3.Vec3()
+        secondSegment2Posn.set( self.bucketXOffset - ( 9 * 0 ) * segSize, 5 , self.backDistBucket )
+        self.secondSegment2.init( secondSegment2Posn , "secondSegment2_segment" )
 
         
         
@@ -533,7 +553,7 @@ class SceneGenerator(object):
         
         self.secondSegment1.genPrev(ret)
         
-        # self.secondSegment2.genPrev(ret)
+        self.secondSegment2.genPrev(ret)
 
         
         
@@ -705,10 +725,16 @@ uniformLayoutStr = retm.uniformLayoutStr()
 vertexStr = retm.vertexStr()
 
 
-faceColorStr = retm.faceColorStr()
+faceColorStr1 = retm.faceColorStr1()
 
 
-faceUnitNormalStr = retm.faceUnitNormalStr()
+faceColorStr2 = retm.faceColorStr2()
+
+
+faceUnitNormalStr1 = retm.faceUnitNormalStr1()
+
+
+faceUnitNormalStr2 = retm.faceUnitNormalStr2()
 
 
 faceIndexStr1 = retm.faceIndexStr1()
@@ -717,19 +743,31 @@ faceIndexStr1 = retm.faceIndexStr1()
 faceIndexStr2 = retm.faceIndexStr2()
 
 
-print( retm )
+with open( "gen.txt" , "w" ) as outf :
 
-print( uniformLayoutStr )
+    outf.write( str( retm ) )
 
-print( vertexStr )
+    outf.write( uniformLayoutStr )
 
-print( faceColorStr )
+    outf.write( vertexStr )
 
-print( faceUnitNormalStr )
+    outf.write( faceColorStr1 )
 
-print( faceIndexStr1 )
+    outf.write( faceColorStr2 )
 
-print( faceIndexStr2 )
+    outf.write( faceUnitNormalStr1 )
+
+    outf.write( faceUnitNormalStr2 )
+
+    outf.write( faceIndexStr1 )
+
+    outf.write( faceIndexStr2 )
+
+
+allocationSize = 3 * len( retm.vertices ) + 2 * 3 * ( FACE_VECT ) + FACE_INDEX
+
+print( "allocation size" )
+print( allocationSize )
 
 
 

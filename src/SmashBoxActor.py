@@ -35,14 +35,32 @@ import openvr
 
 import Vec3
 import Target
+import RetainedMode
 import SceneGenerator
 import SoundServices
 from glfw import TRUE, FALSE
 
 
-"""
-Color cube for use in "hello world" openvr apps
-"""
+FACE_LIMIT = RetainedMode.FACE_LIMIT
+
+
+
+FACE_VECT = RetainedMode.FACE_VECT
+
+FACE_VECT_STR = RetainedMode.FACE_VECT_STR
+
+
+
+FACE_INDEX = RetainedMode.FACE_INDEX
+
+FACE_INDEX_STR = RetainedMode.FACE_INDEX_STR
+
+
+
+
+INDEX_MAX = RetainedMode.INDEX_MAX
+
+
 
 
 class SmashBoxActor(object):
@@ -464,10 +482,16 @@ class SmashBoxActor(object):
         vertexStr = retm.vertexStr()
 
 
-        faceColorStr = retm.faceColorStr()
+        faceColorStr1 = retm.faceColorStr1()
 
 
-        faceUnitNormalStr = retm.faceUnitNormalStr()
+        faceColorStr2 = retm.faceColorStr2()
+
+
+        faceUnitNormalStr1 = retm.faceUnitNormalStr1()
+
+
+        faceUnitNormalStr2 = retm.faceUnitNormalStr2()
 
 
         faceIndexStr1 = retm.faceIndexStr1()
@@ -724,9 +748,9 @@ class SmashBoxActor(object):
 "            // Minimum Y value is zero, so cube sits on the floor in room scale \n" +
              vertexStr +
 "             \n" +
-             faceUnitNormalStr +
+             faceUnitNormalStr1 +
 "             \n" +
-             faceColorStr +
+             faceColorStr1 +
 "             \n" +
              faceIndexStr1 +
 "             \n" +
@@ -1012,9 +1036,9 @@ class SmashBoxActor(object):
 "            // Minimum Y value is zero, so cube sits on the floor in room scale \n" +
              vertexStr +
 "             \n" +
-             faceUnitNormalStr +
+             faceUnitNormalStr2 +
 "             \n" +
-             faceColorStr +
+             faceColorStr2 +
 "             \n" +
              faceIndexStr2 +
 "             \n" +
@@ -1030,7 +1054,7 @@ class SmashBoxActor(object):
 "\n"
 "              int vertexIndex = FACE_INDICES[gl_VertexID] ; \n" +
 "\n"
-"              int normalIndex = ( gl_VertexID + ( 999 * 2 ) ) / 3; \n" +
+"              int normalIndex = ( gl_VertexID ) / 3; \n" +
 "               \n" +
 "              _color = FACE_COLORS[normalIndex]; \n" +
 "              if (any(lessThan(_color, vec3(0.0)))) { \n" +
@@ -1051,6 +1075,11 @@ class SmashBoxActor(object):
             "\n" )
         
         
+        with open( "shade1.txt" , "w" ) as outf :
+            outf.write( compileShaderString1 )
+        with open( "shade2.txt" , "w" ) as outf : 
+            outf.write( compileShaderString2 )
+            
         vertex_shader1 = compileShader(
             shader_string( compileShaderString1 ), 
             GL_VERTEX_SHADER)

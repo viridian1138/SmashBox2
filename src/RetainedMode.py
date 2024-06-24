@@ -24,6 +24,28 @@ import Vec3
 import Face3
 
 
+FACE_LIMIT = 222
+
+
+
+FACE_VECT = 3 * FACE_LIMIT
+
+FACE_VECT_STR = str( FACE_VECT )
+
+
+
+FACE_INDEX = 3 * FACE_VECT
+
+FACE_INDEX_STR = str( FACE_INDEX )
+
+
+
+
+INDEX_MAX = 2 * FACE_INDEX
+
+
+
+
 class RetainedMode(object):
     
     def __init__(self):
@@ -77,23 +99,73 @@ class RetainedMode(object):
         ret = ret + "            ); \n"
         return ret
         
-    def faceColorStr(self):
-        sz = str(len(self.faces))
-        ret = "const vec3 FACE_COLORS[" + sz + "] = vec3[" + sz + "]( \n"
-        for x in range(len(self.faces)):
+    def faceColorStr1(self):
+        ret = ""
+        
+        if len( self.indices ) > ( INDEX_MAX - 1 ) :
+           raise Exception( "Internal Error" )
+        
+        szI = FACE_VECT
+        sz = str(szI)
+        ret = ret + "const vec3 FACE_COLORS[" + sz + "] = vec3[" + sz + "]( \n"
+        for x in range(szI):
             ret = ret + self.faces[x].faceColor.retainedStr()
-            if not x == ( len(self.faces) - 1 ) :
+            if not x == ( szI - 1 ) :
                 ret = ret + ","
             ret = ret + "\n"
         ret = ret + "            ); \n"
         return ret
         
-    def faceUnitNormalStr(self):
-        sz = str(len(self.faces))
-        ret = "const vec3 FACE_UNIT_NORMALS[" + sz + "] = vec3[" + sz + "]( \n"
-        for x in range(len(self.faces)):
+    def faceColorStr2(self):
+        ret = ""
+        
+        if len( self.indices ) > ( INDEX_MAX - 1 ) :
+           raise Exception( "Internal Error" )
+        
+        ret = ret + "\n"
+        
+        szI = len(self.faces) - FACE_VECT
+        sz = str(szI)
+        ret = ret + "const vec3 FACE_COLORS[" + sz + "] = vec3[" + sz + "]( \n"
+        for x in range(szI):
+            ret = ret + self.faces[x+FACE_VECT].faceColor.retainedStr()
+            if not x == ( szI - 1 ) :
+                ret = ret + ","
+            ret = ret + "\n"
+        ret = ret + "            ); \n"
+        return ret
+        
+    def faceUnitNormalStr1(self):
+        ret = ""
+        
+        if len( self.indices ) > ( INDEX_MAX - 1 ) :
+           raise Exception( "Internal Error" )
+        
+        szI = FACE_VECT
+        sz = str(szI)
+        ret = ret = "const vec3 FACE_UNIT_NORMALS[" + sz + "] = vec3[" + sz + "]( \n"
+        for x in range(szI):
             ret = ret + self.faces[x].normal.retainedStr()
-            if not x == ( len(self.faces) - 1 ) :
+            if not x == ( szI - 1 ) :
+                ret = ret + ","
+            ret = ret + "\n"
+        ret = ret + "            ); \n"
+        return ret
+        
+    def faceUnitNormalStr2(self):
+        ret = ""
+        
+        if len( self.indices ) > ( INDEX_MAX - 1 ) :
+           raise Exception( "Internal Error" )
+        
+        ret = ret + "\n"
+        
+        szI = len(self.faces) - FACE_VECT
+        sz = str(szI)
+        ret = ret + "const vec3 FACE_UNIT_NORMALS[" + sz + "] = vec3[" + sz + "]( \n"
+        for x in range(szI):
+            ret = ret + self.faces[x+FACE_VECT].normal.retainedStr()
+            if not x == ( szI - 1 ) :
                 ret = ret + ","
             ret = ret + "\n"
         ret = ret + "            ); \n"
@@ -102,11 +174,11 @@ class RetainedMode(object):
     def faceIndexStr1(self):
         ret = ""
         
-        if len( self.indices ) > ( 999 * 4 - 1 ) :
+        if len( self.indices ) > ( INDEX_MAX - 1 ) :
            raise Exception( "Internal Error" )
         
         if True :
-            szI = ( 999 * 2 )
+            szI = FACE_INDEX
             sz = str(szI)
             ret = ret + "const int FACE_INDICES[" + sz + "] = int[" + sz + "]( \n"
             for x in range(szI):
@@ -122,17 +194,17 @@ class RetainedMode(object):
     def faceIndexStr2(self):
         ret = ""
         
-        if len( self.indices ) > ( 999 * 4 - 1 ) :
+        if len( self.indices ) > ( INDEX_MAX - 1 ) :
            raise Exception( "Internal Error" )
         
         ret = ret + "\n"
         
         if True :
-            szI = len(self.indices) - ( 999 * 2 )
+            szI = len(self.indices) - FACE_INDEX
             sz = str(szI)
             ret = ret + "const int FACE_INDICES[" + sz + "] = int[" + sz + "]( \n"
             for x in range(szI):
-                r = self.indices[x+( 999 * 2 )]
+                r = self.indices[x+FACE_INDEX]
                 ret = ret + str( r )
                 if not x == ( szI - 1 ) :
                     ret = ret + ","
@@ -142,10 +214,10 @@ class RetainedMode(object):
         return ret
     
     def getIndexSize1(self):
-        return ( 999 * 2 )
+        return FACE_INDEX
     
     def getIndexSize2(self):
-        return len(self.indices) - ( 999 * 2 )
+        return len(self.indices) - FACE_INDEX
         
     
   
