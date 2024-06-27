@@ -6,6 +6,6 @@ SmashBox2 is a full body track (both hands and feet) Virtual Reality (VR) martia
 
 This is a draft version.
 
-SmashBox2 is based on SmashBox, but provides full body tracking which SmashBox lacked.  Also, SmashBox2 ports the original SmashBox from JavaScript to Python and changes the API from Three.JS to PyOpenVR..
+SmashBox2 is based on SmashBox (  https://viridian1138.github.io/SmashBox/index.html ), but provides full body tracking which SmashBox lacked.  Also, SmashBox2 ports the original SmashBox from JavaScript to Python and changes the API from Three.JS to PyOpenVR..
 
 
